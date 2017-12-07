@@ -58,7 +58,7 @@ class LinkedList
 
   def find(num1, num2)
     if num1.abs != num1 || num2.abs != num2
-      return "Only positive numbers, please!"
+      return "Only positive integers!"
     else
       words = to_string.split(" ")
       str = words[num1..num1+num2-1].join(" ")
@@ -76,6 +76,7 @@ class LinkedList
      if empty?
        nil
      elsif count == 1
+       @head = nil
        popped = current.data
      else
        pop_returner(current)

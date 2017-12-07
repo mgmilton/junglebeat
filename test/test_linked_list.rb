@@ -52,8 +52,8 @@ class LinkedListTest < Minitest::Test
     list.prepend("woop")
     list.insert(2, "gawk")
     assert_equal "woop doop gawk boop", list.to_string
-
   end
+
   def test_insert_prepends_when_zero_is_given
     list = LinkedList.new
     list.append("doop")
@@ -83,7 +83,7 @@ class LinkedListTest < Minitest::Test
     list.append("doop")
     list.append("boop")
     list.append("woop")
-    assert_equal "Only positive numbers, please!", list.find(-2,-2)
+    assert_equal "Only positive integers!", list.find(-2,-2)
   end
 
   def test_includes_checks_list_for_existing_values
