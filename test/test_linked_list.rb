@@ -83,7 +83,7 @@ class LinkedListTest < Minitest::Test
     list.append("doop")
     list.append("boop")
     list.append("woop")
-    assert_equal "ERROR!", list.find(-2,-2)
+    assert_equal "Only positive numbers, please!", list.find(-2,-2)
   end
 
   def test_includes_checks_list_for_existing_values
@@ -107,10 +107,47 @@ class LinkedListTest < Minitest::Test
   def test_pop_returns_last_item_from_list
     list = LinkedList.new
     list.append("doop")
+    assert_equal "doop", list.pop
+  end
+
+  ###### helper method tests ######
+  def test_empty_returns_true_when_head_is_nil
+    list = LinkedList.new
+    assert list.empty?
+    list.append("doop")
+    refute list.empty?
+  end
+
+  def test_insert_node_stores_trailing_node
+    list = LinkedList.new
     list.append("boop")
-    list.append("woop")
-    assert_equal "woop", list.pop
+    list.append("doop")
+    list.append("romp")
+    assert_equal list.tail, list.insert_node(list.head.next_node, 1, "douy")
   end
 
 
+  def test_tail_generates_linkedlist_tail
+    list = LinkedList.new
+    list.append("boop")
+    list.append("doop")
+    list.append("romp")
+    assert_equal list.head.next_node.next_node, list.tail
+  end
+
+  def test_find_node_runs_to_specified_node
+    list = LinkedList.new
+    list.append("boop")
+    list.append("doop")
+    list.append("romp")
+    assert_equal list.head.next_node, list.find_node(2, list.head)
+  end
+
+  def pop_returner_finds_last_node
+    list = LinkedList.new
+    list.append("boop")
+    list.append("doop")
+    list.append("romp")
+    assert_equal "romp", list.pop_returner(current)
+  end
 end

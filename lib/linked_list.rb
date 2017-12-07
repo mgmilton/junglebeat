@@ -1,5 +1,4 @@
 require_relative 'node'
-require 'pry'
 
 class LinkedList
   attr_reader :head
@@ -59,7 +58,7 @@ class LinkedList
 
   def find(num1, num2)
     if num1.abs != num1 || num2.abs != num2
-      return "ERROR!"
+      return "Only positive numbers, please!"
     else
       words = to_string.split(" ")
       str = words[num1..num1+num2-1].join(" ")
@@ -73,14 +72,16 @@ class LinkedList
   end
 
   def pop
-    current = @head
-    until current.next_node.next_node == nil
-      poppedword = current.next_node.next_node.data
-      current = current.next_node
-    end
-    current.next_node = nil
-    return poppedword
-  end
+     current = @head
+     if empty?
+       nil
+     elsif count == 1
+       popped = current.data
+     else
+       pop_returner(current)
+     end
+     popped
+   end
 
 ##### helper methods
   def insert_node(current, num, data)
@@ -105,5 +106,14 @@ class LinkedList
 
   def empty?
     @head == nil
+  end
+
+  def pop_returner(current)
+    while current.next_node.next_node != nil
+      current = current.next_node
+    end
+    popped = current.next_node.data
+    current.next_node = nil
+    return popped
   end
 end
